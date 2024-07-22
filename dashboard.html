@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!--CSS - ESTILOS-->
+    <link rel="stylesheet" href="frontend/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="frontend/vendor/fontAwesome/css/all.css">
+    <link rel="stylesheet" href="frontend/vendor/sweetAlert/dist/sweetalert2.css">
+
+    <link rel="stylesheet" href="frontend/assets/css/style_index.css">
+    <!--JS - SCRIPTS-->
+    <script src="frontend/vendor/scripts/jquery-3.7.1.js" defer></script>
+    <script src="frontend/vendor/bootstrap/js/bootstrap.js" defer></script>
+    <script src="frontend/vendor/sweetAlert/dist/sweetalert2.all.js" defer></script>
+
+    <script src="frontend/assets/js/dashboard.js" defer></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand">Jornal DS</a>
+        <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="my-nav" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="frontend/screens/views/controllerAutor.html">Autores <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="frontend/screens/views/controllerNoticia.html">Notícias <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="frontend/screens/views/controllerEvento.html">Eventos <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mt-5" id="main">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 class="mt-5 text-center text-dark">Bem vindo ao Sistema Gerenciador do Jornal</h1>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

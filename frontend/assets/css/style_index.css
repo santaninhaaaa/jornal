@@ -1,0 +1,20 @@
+destaque{
+    color: rgb(19, 152, 229);
+}
+
+button{
+    background-color: rgb(19, 152, 229);
+}
+
+.navbar, .jumbotron, footer{
+    background-color: black;
+}
+
+.corpo{
+    border-radius: 20px;
+}
+
+a {
+    color: white;
+    text-decoration: underline;
+}

@@ -1,0 +1,83 @@
+<div class="row mt-5">
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-12 col-md-10">
+                        <h4 class="text-dark">Gerenciamento de autores</h4>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <button class="btn btn-dark btn-block btn-new"><i class="fa-solid fa-circle-plus"></i> Novo Registro</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col" class="text-center">ID</th>
+                                <th scope="col" class="text-center">Nome</th>
+                                <th scope="col" class="text-center">Acões</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">00</td>
+                                <td class="text-center">Lorem ipsum dolor sit amet</td>
+                                <td class="text-center">
+                                    <button class="btn btn-info btn-view"><i class="fa-solid fa-eye"></i></button>
+                                    <button class="btn btn-warning btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-danger btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <p class="text-center">Todos os direitos reservados</p>
+                <p class="test-right text-dark">Desenvolvido com <i class="fa-solid fa-heart-pulse"></i> por: Santana</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-autor" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Title</h5>
+                <button class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-autor">
+
+                    <div class="form-group">
+                        <label>Nome do autor</label>
+                        <input type="text" name="nome" id="nome" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Login</label>
+                        <input type="text" name="login" id="login" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" name="senha" id="senha" class="form-control">
+                    </div>
+
+                    <input type="hidden" name="id" id="id">
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-block btn-save">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="frontend/screens/controllers/controllerAutor.js"></script>
