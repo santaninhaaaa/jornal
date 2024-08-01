@@ -137,6 +137,6 @@ if($_POST['operacao'] == 'delete'){
 } 
 
 
-// echo json_encode($dados);
+echo json_encode($dados);
 
 ?>

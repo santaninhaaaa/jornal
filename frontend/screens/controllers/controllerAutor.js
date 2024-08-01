@@ -59,7 +59,7 @@ $(document).ready(function(){
                     title: 'Jornal Etec',
                     text: dados.message
                 })
-
+                $('#modal-autor').modal('hide')
             }
 
         })

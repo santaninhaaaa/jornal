@@ -23,27 +23,31 @@ $(document).ready(function(){
         data: dados,
         url: url,
         success: function(dados){
-            $('tbody').append(`
-                <tr>
-                    <td class="text-center">${dado.ID}</td>
-                    <td class="text-center">${dado.TITULO}</td>
-                    <td class="text-center">${dado.RESUMO}</td>
-                    <td class="text-center">${dado.CORPO}</td>
-                    <td class="text-center">${dado.DATA}</td>
-                    <td class="text-center">
-                        <button id="${dado.ID}" class="btn btn-info btn-view"><i class="fa-solid fa-eye"></i></button>
-                        <button id="${dado.ID}" class="btn btn-warning btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button id="${dado.ID}" class="btn btn-danger btn-delete"><i class="fa-solid fa-trash-can"></i></button>
-                    </td>
-                </tr>
-            `)
+            $('tbody').empty()
+            
+            for(const dado of dados){
+                $('tbody').append(`
+                    <tr>
+                        <td class="text-center">${dado.ID}</td>
+                        <td class="text-center">${dado.TITULO}</td>
+                        <td class="text-center">${dado.RESUMO}</td>
+                        <td class="text-center">${dado.CORPO}</td>
+                        <td class="text-center">${dado.DATA}</td>
+                        <td class="text-center">
+                            <button id="${dado.ID}" class="btn btn-info btn-view"><i class="fa-solid fa-eye"></i></button>
+                            <button id="${dado.ID}" class="btn btn-warning btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button id="${dado.ID}" class="btn btn-danger btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>
+                `)
+            }
         }
     })
 
     //criando a funcionalidade pra salvar novos registros no BD
     $('.btn-save').click(function(e){
         e.preventDefault()
-        let dados = $('#form-autor').serialize()
+        let dados = $('#form-noticia').serialize()
         dados += `&operacao=${$(this).attr('data-operation')}`
         $.ajax({
             type: 'POST',
@@ -57,6 +61,7 @@ $(document).ready(function(){
                     title: 'Jornal Etec',
                     text: dados.message
                 })
+                $('#modal-noticia').modal('hide')
             }
 
         })
