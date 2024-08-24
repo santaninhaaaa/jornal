@@ -11,7 +11,16 @@ $(document).ready(function(){
         //abrindo modal
         $('#modal-evento').modal('show')
         //inclui propriedade data no botão de salvar
-        $('.btn-save').attr('data-operation', 'create')
+        $('.btn-save').empty().append('Salvar').attr('data-operation', 'create').show()
+        //removendo os dados que ficam "salvos" quando vc clicar pra criar
+        $('input[type="text"]').val('').attr('disabled', false)
+        $('input[type="date"]').val('').attr('disabled', false)
+        $('input[type="text"]').val('').attr('disabled', false)
+        $('input[type="time"]').val('').attr('disabled', false)
+        $('input[type="text"]').val('').attr('disabled', false)
+        $('input[type="text"]').val('').attr('disabled', false)
+        $('input[type="number"]').val('').attr('disabled', false)
+        $('input[type="hidden"]').val('')
     })
 
     //criando funcionalidade para preencher a tabela com as info do BD
@@ -43,6 +52,86 @@ $(document).ready(function(){
                     </tr>
                 `)
             }
+
+            //criando a funcionalidade pra visualisar os registro no BD
+            $('.btn-view').click(function(e){
+                e.preventDefault()
+                let dados = `ID=${$(this).attr('id')}&operacao=view`
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'JSON',
+                    assync: true,
+                    data: dados,
+                    url: url,
+                    success: function(dados){
+                        $('#titulo').val(dados[0].TITULO).attr('disabled', true)
+                        $('#data').val(dados[0].DATA).attr('disabled', true)
+                        $('#local').val(dados[0].LOCAL).attr('disabled', true)
+                        $('#horario').val(dados[0].HORARIO).attr('disabled', true)
+                        $('#resumo').val(dados[0].RESUMO).attr('disabled', true)
+                        $('#corpo').val(dados[0].CORPO).attr('disabled', true)
+                        $('#autor_id').val(dados[0].AUTOR_ID).attr('disabled', true)
+                        $('.btn-save').hide()
+                        //alterando o cabeçalho o modal
+                        $('.modal-title').empty().append('Visualização do evento')
+                        //abrindo modal
+                        $('#modal-evento').modal('show')
+                    }
+
+                })
+            })
+
+            //criando a funcionalidade pra editar os registro no BD
+            $('.btn-edit').click(function(e){
+                e.preventDefault()
+                let dados = `ID=${$(this).attr('id')}&operacao=view`
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'JSON',
+                    assync: true,
+                    data: dados,
+                    url: url,
+                    success: function(dados){
+                        $('#titulo').val(dados[0].TITULO).attr('disabled', false)
+                        $('#data').val(dados[0].DATA).attr('disabled', false)
+                        $('#local').val(dados[0].LOCAL).attr('disabled', false)
+                        $('#horario').val(dados[0].HORARIO).attr('disabled', false)
+                        $('#resumo').val(dados[0].RESUMO).attr('disabled', false)
+                        $('#corpo').val(dados[0].CORPO).attr('disabled', false)
+                        $('#autor_id').val(dados[0].AUTOR_ID).attr('disabled', false)
+                        $('#id').val(dados[0].ID)
+                        $('.btn-save').empty().append('Alterar evento').attr('data-operation', 'update').show()
+                        //alterando o cabeçalho o modal
+                        $('.modal-title').empty().append('Edição do evento')
+                        //abrindo modal
+                        $('#modal-evento').modal('show')
+                    }
+
+                })
+            })
+
+            //criando a funcionalidade pra excluir os registro no BD
+            $('.btn-delete').click(function(e){
+                e.preventDefault()
+                let dados = `id=${$(this).attr('id')}&operacao=delete`
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'JSON',
+                    assync: true,
+                    data: dados,
+                    url: url,
+                    success: function(dados){
+                        Swal.fire({
+                            icon: dados.type,
+                            title: 'Jornal Etec',
+                            text: dados.message
+                        })
+                        $('#main').empty().load('frontend/screens/views/controllerEvento.html')
+                    }
+
+                })
+            })     
+
         }
     })
 
@@ -64,6 +153,7 @@ $(document).ready(function(){
                     text: dados.message
                 })
                 $('#modal-evento').modal('hide')
+                $('#main').empty().load('frontend/screens/views/controllerEvento.html')
             }
 
         })

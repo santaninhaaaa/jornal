@@ -11,8 +11,7 @@ $(document).ready(function(){
         //abrindo modal
         $('#modal-autor').modal('show')
         //inclui propriedade data no botão de salvar
-        $('.btn-save').empty().append('Salvar registro').show()
-        $('.btn-save').attr('data-operation', 'create')
+        $('.btn-save').empty().append('Salvar').attr('data-operation', 'create').show()
         //removendo os dados que ficam "salvos" quando vc clicar pra criar
         $('input[type="text"]').val('').attr('disabled', false)
         $('input[type="password"]').val('').attr('disabled', false)
