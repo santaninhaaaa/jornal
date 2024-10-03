@@ -141,6 +141,50 @@ if($_POST['operacao'] == 'view'){
     }
 }
 
+if($_POST['operacao'] == 'login'){
+    try{
+        $login = isset($_POST['LOGIN']) ? addslashes(trim($_POST['LOGIN'])) : false;
+        $senha = isset($_POST['SENHA']) ? $_POST['SENHA'] : false;
+        if(empty($login) || empty($senha)){
+            $dados = [
+                'type' => 'error',
+                'message' => 'Usuário ou senha não preeenchidos'
+            ];
+        }
+        $sql = $pdo->prepare("SELECT * FROM AUTOR WHERE LOGIN = '".$_POST['LOGIN']."' AND SENHA = '".$_POST['SENHA']."'");
+        $sql->execute();
+        $total = $sql->rowCount();
+        if($total === 1){
+            $linha = $sql->fetch();
+            session_start();
+            $_SESSION['LOGIN'] = $linha['LOGIN'];
+            $_SESSION['NOME'] = $linha['NOME'];
+            $_SESSION['IDAUTOR'] = $linha['ID'];
+
+            $dados = [
+                'type' => 'success',
+                'message' => 'Seja bem-vindo(a) '.$_SESSION['NOME']
+            ];
+        } else {
+            $dados = [
+                'type' => 'error',
+                'message' => 'Usuário e/ou senha incorretos'
+            ];
+        }
+    } catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+if($_POST['operacao'] == 'logout'){
+    session_start();
+    session_destroy();
+    $dados = [
+        'type' => 'success',
+        'message' => 'Adeus '. $_SESSION['NOME']
+    ];
+}
+
 echo json_encode($dados);
 
 ?>

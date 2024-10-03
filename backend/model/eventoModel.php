@@ -80,7 +80,7 @@ if($_POST['operacao'] == 'update'){
     }else{
 
         try{
-            $sql = "UPDATE EVENTO SET TITULO = ?, DATA = ?, LOCAL = ?, HORARIO = ? RESUMO = ?, CORPO = ?, AUTOR_ID = ? WHERE ID = ?";
+            $sql = "UPDATE EVENTO SET TITULO = ?, DATA = ?, LOCAL = ?, HORARIO = ?, RESUMO = ?, CORPO = ?, AUTOR_ID = ? WHERE ID = ?";
             $stmt /*statement*/ = $pdo->prepare($sql); //prepare testa o sql conferindo se não há nenhum codigo malicioso
             $stmt -> execute([ //executa sql
                 $_POST['titulo'],

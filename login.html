@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login do Jornal</title>
+    <!--CSS - ESTILOS-->
+    <link rel="stylesheet" href="frontend/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="frontend/vendor/fontAwesome/css/all.css">
+    <link rel="stylesheet" href="frontend/vendor/sweetAlert/dist/sweetalert2.css">
+
+    <!--JS - SCRIPTS-->
+    <script src="frontend/vendor/scripts/jquery-3.7.1.js" defer></script>
+    <script src="frontend/vendor/bootstrap/js/bootstrap.js" defer></script>
+    <script src="frontend/vendor/sweetAlert/dist/sweetalert2.all.js" defer></script>
+
+    <script src="frontend/screens/controllers/controllerLogin.js" defer></script>
+</head>
+
+<body>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4">
+                <h4 class="text-center"> Login do sistema </h4>
+                <form id="form-login">
+                    <div class="form-froup">
+                        <label>Login</label>
+                        <input type="text" name="LOGIN" id="LOGIN" class="form-control">
+                    </div>
+                    <div class="form-froup">
+                        <label>Senha</label>
+                        <input type="password" name="SENHA" id="SENHA" class="form-control">
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <button class="btn btn-success btn-block btn-login mt-3">Acessar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,10 +1,10 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     //constante do arquivo
     const url = 'backend/model/autorModel.php'
 
     // criar funcionalidade pra abrir modal de novo registor
-    $('.btn-new').click(function(e){
+    $('.btn-new').click(function (e) {
         e.preventDefault()
         //alterando o cabeçalho o modal
         $('.modal-title').empty().append('Cadastro de novo autor')
@@ -20,17 +20,18 @@ $(document).ready(function(){
 
     //criando funcionalidade para preencher a tabela com as info do BD
     let dados = 'operacao=read'
-    $.ajax({
-        type: 'POST',
-        dataType: 'JSON',
-        assync: true,
-        data: dados,
-        url: url,
-        success: function(dados){
-            $('tbody').empty()
-            for(const dado of dados){
+    $.ajax
+        ({
+            type: 'POST',
+            dataType: 'JSON',
+            assync: true,
+            data: dados,
+            url: url,
+            success: function (dados) {
+                $('tbody').empty()
+                for (const dado of dados) {
 
-                $('tbody').append(`
+                    $('tbody').append(`
                     <tr>
                         <td class="text-center">${dado.ID}</td>
                         <td class="text-center">${dado.NOME}</td>
@@ -42,84 +43,84 @@ $(document).ready(function(){
                     </tr>
                 `)
 
+                }
+
+                //criando a funcionalidade pra visualisar os registro no BD
+                $('.btn-view').click(function (e) {
+                    e.preventDefault()
+                    let dados = `ID=${$(this).attr('id')}&operacao=view`
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        assync: true,
+                        data: dados,
+                        url: url,
+                        success: function (dados) {
+                            $('#nome').val(dados[0].NOME).attr('disabled', true)
+                            $('#login').val(dados[0].LOGIN).attr('disabled', true)
+                            $('#senha').val(dados[0].SENHA).attr('disabled', true)
+                            $('.btn-save').hide()
+                            //alterando o cabeçalho o modal
+                            $('.modal-title').empty().append('Visualização do autor')
+                            //abrindo modal
+                            $('#modal-autor').modal('show')
+                        }
+
+                    })
+                })
+
+                //criando a funcionalidade pra editar os registro no BD
+                $('.btn-edit').click(function (e) {
+                    e.preventDefault()
+                    let dados = `ID=${$(this).attr('id')}&operacao=view`
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        assync: true,
+                        data: dados,
+                        url: url,
+                        success: function (dados) {
+                            $('#nome').val(dados[0].NOME).attr('disabled', false)
+                            $('#login').val(dados[0].LOGIN).attr('disabled', false)
+                            $('#senha').val(dados[0].SENHA).attr('disabled', false)
+                            $('#id').val(dados[0].ID)
+                            $('.btn-save').empty().append('Alterar registro').attr('data-operation', 'update').show()
+                            //alterando o cabeçalho o modal
+                            $('.modal-title').empty().append('Edição do autor')
+                            //abrindo modal
+                            $('#modal-autor').modal('show')
+                        }
+
+                    })
+                })
+
+                //criando a funcionalidade pra excluir os registro no BD
+                $('.btn-delete').click(function (e) {
+                    e.preventDefault()
+                    let dados = `id=${$(this).attr('id')}&operacao=delete`
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'JSON',
+                        assync: true,
+                        data: dados,
+                        url: url,
+                        success: function (dados) {
+                            Swal.fire({
+                                icon: dados.type,
+                                title: 'Jornal Etec',
+                                text: dados.message
+                            })
+                            $('#main').empty().load('frontend/screens/views/controllerAutor.html')
+                        }
+
+                    })
+                })
+
             }
-
-            //criando a funcionalidade pra visualisar os registro no BD
-            $('.btn-view').click(function(e){
-                e.preventDefault()
-                let dados = `ID=${$(this).attr('id')}&operacao=view`
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'JSON',
-                    assync: true,
-                    data: dados,
-                    url: url,
-                    success: function(dados){
-                        $('#nome').val(dados[0].NOME).attr('disabled', true)
-                        $('#login').val(dados[0].LOGIN).attr('disabled', true)
-                        $('#senha').val(dados[0].SENHA).attr('disabled', true)
-                        $('.btn-save').hide()
-                        //alterando o cabeçalho o modal
-                        $('.modal-title').empty().append('Visualização do autor')
-                        //abrindo modal
-                        $('#modal-autor').modal('show')
-                    }
-
-                })
-            })
-
-            //criando a funcionalidade pra editar os registro no BD
-            $('.btn-edit').click(function(e){
-                e.preventDefault()
-                let dados = `ID=${$(this).attr('id')}&operacao=view`
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'JSON',
-                    assync: true,
-                    data: dados,
-                    url: url,
-                    success: function(dados){
-                        $('#nome').val(dados[0].NOME).attr('disabled', false)
-                        $('#login').val(dados[0].LOGIN).attr('disabled', false)
-                        $('#senha').val(dados[0].SENHA).attr('disabled', false)
-                        $('#id').val(dados[0].ID)
-                        $('.btn-save').empty().append('Alterar registro').attr('data-operation', 'update').show()
-                        //alterando o cabeçalho o modal
-                        $('.modal-title').empty().append('Edição do autor')
-                        //abrindo modal
-                        $('#modal-autor').modal('show')
-                    }
-
-                })
-            })
-
-            //criando a funcionalidade pra excluir os registro no BD
-            $('.btn-delete').click(function(e){
-                e.preventDefault()
-                let dados = `id=${$(this).attr('id')}&operacao=delete`
-                $.ajax({
-                    type: 'POST',
-                    dataType: 'JSON',
-                    assync: true,
-                    data: dados,
-                    url: url,
-                    success: function(dados){
-                        Swal.fire({
-                            icon: dados.type,
-                            title: 'Jornal Etec',
-                            text: dados.message
-                        })
-                        $('#main').empty().load('frontend/screens/views/controllerAutor.html')
-                    }
-
-                })
-            })
-
-        }
-    })
+        })
 
     //criando a funcionalidade pra salvar novos registros no BD
-    $('.btn-save').click(function(e){
+    $('.btn-save').click(function (e) {
         e.preventDefault()
         let dados = $('#form-autor').serialize()
         dados += `&operacao=${$(this).attr('data-operation')}`
@@ -129,7 +130,7 @@ $(document).ready(function(){
             assync: true,
             data: dados,
             url: url,
-            success: function(dados){
+            success: function (dados) {
                 Swal.fire({
                     icon: dados.type,
                     title: 'Jornal Etec',

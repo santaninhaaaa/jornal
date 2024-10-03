@@ -1,16 +1,18 @@
-destaque{
+destaque {
     color: rgb(19, 152, 229);
 }
 
-button{
+button {
     background-color: rgb(19, 152, 229);
 }
 
-.navbar, .jumbotron, footer{
+.navbar,
+.jumbotron,
+footer {
     background-color: black;
 }
 
-.corpo{
+.corpo {
     border-radius: 20px;
 }
 
